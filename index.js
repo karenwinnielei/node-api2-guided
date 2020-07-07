@@ -1,6 +1,7 @@
 const express = require('express');
 
-const Hubs = require('./hubs/hubs-model.js');
+const hubsRouter = require('./hubs/hubs-router')
+const messagesRouter = require('./messages/messages-router')
 
 const server = express();
 
@@ -12,6 +13,9 @@ server.get('/', (req, res) => {
     <p>Welcome to the Lambda Hubs API</p>
   `);
 });
+
+server.use('/api/hubs', hubsRouter)
+server.use('/api/messages', messagesRouter)
 
 server.get('/api/hubs', (req, res) => {
   Hubs.find(req.query)
